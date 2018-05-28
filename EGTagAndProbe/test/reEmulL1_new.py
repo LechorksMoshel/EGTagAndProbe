@@ -3,9 +3,9 @@ import FWCore.PythonUtilities.LumiList as LumiList
 import FWCore.ParameterSet.Config as cms
 from Configuration.StandardSequences.Eras import eras
 
+process = cms.Process("TagAndProbe",eras.Run2_2017)
 isMC = False
 isMINIAOD = True
-process = cms.Process("TagAndProbe",eras.Run2_2017)
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
@@ -104,18 +104,19 @@ if not isMC: # will use 80X
 
 #Martin's addition (not necessary for me)
 
-    #process.GlobalTag.toGet = cms.VPSet(
-     #       cms.PSet(record = cms.string("EcalTPGLinearizationConstRcd"),
-      #          tag = cms.string("EcalTPGLinearizationConst_IOV_280026_beginning_at_1"),
-       #         connect =cms.string('sqlite_file:/home/llr/cms/novoa/PedestalCond/EcalTPG_280026_moved_to_1_Ped_161310.db')),
-        #    cms.PSet(record = cms.string("EcalTPGPedestalsRcd"),
-         #       tag = cms.string("EcalTPGPedestals_280026_beginning_at_1"),
-          #      connect =cms.string('sqlite_file:/home/llr/cms/novoa/PedestalCond/EcalTPG_280026_moved_to_1_Ped_161310.db')))
+    process.GlobalTag.toGet = cms.VPSet(
+           cms.PSet(record = cms.string("EcalTPGLinearizationConstRcd"),
+                tag = cms.string("EcalTPGLinearizationConst_IOV_306152_beginning_at_1"),
+                connect =cms.string('sqlite_file:EcalTPG_306152_moved_to_1.db')),
+           cms.PSet(record = cms.string("EcalTPGPedestalsRcd"),
+                tag = cms.string("EcalTPGPedestals_306152_beginning_at_1"),
+               connect =cms.string('sqlite_file:EcalTPG_306152_moved_to_1.db')))
 
     process.load('EGTagAndProbe.EGTagAndProbe.tagAndProbe_cff')
     process.source = cms.Source("PoolSource",
             fileNames = cms.untracked.vstring(
-                 '/store/data/Run2017C/SingleElectron/MINIAOD/PromptReco-v3/000/300/777/00000/C499093F-BA7E-E711-9F4D-02163E013897.root'
+		'/store/data/Run2017F/SingleElectron/MINIAOD/PromptReco-v1/000/306/460/00000/6236CEDA-C0C8-E711-9081-FA163E84B51B.root'
+                # '/store/data/Run2017C/SingleElectron/MINIAOD/PromptReco-v3/000/300/777/00000/C499093F-BA7E-E711-9F4D-02163E013897.root'
                 #'/store/data/Run2017B/SingleElectron/MINIAOD/PromptReco-v1/000/297/050/00000/166F7BB0-3C56-E711-BD8B-02163E0145C5.root'
                 #'/store/data/Run2017B/SingleElectron/MINIAOD/PromptReco-v1/000/297/057/00000/94987913-A256-E711-A484-02163E01A391.root' 
                 ),
@@ -143,6 +144,14 @@ if not isMC: # will use 80X
 
 
      #       secondaryFileNames = cms.untracked.vstring('file:AA918EB1-6E64-E611-9BE0-00259074AE54.root')
+             secondaryFileNames = cms.untracked.vstring(
+             	 '/store/data/Run2017F/SingleElectron/RAW/v1/000/306/460/00000/1EEAEA41-20C6-E711-8A21-02163E013726.root',
+             	 '/store/data/Run2017F/SingleElectron/RAW/v1/000/306/460/00000/4E38EC44-20C6-E711-9A1D-02163E01372A.root',
+             	 '/store/data/Run2017F/SingleElectron/RAW/v1/000/306/460/00000/5888144F-20C6-E711-A00E-02163E013605.root',
+             	 '/store/data/Run2017F/SingleElectron/RAW/v1/000/306/460/00000/7E1FEB76-EBC6-E711-BD37-02163E011FC7.root',
+             	 '/store/data/Run2017F/SingleElectron/RAW/v1/000/306/460/00000/D8A36F44-20C6-E711-8463-02163E0146F5.root'
+
+             )
             #'/store/mc/RunIISpring16MiniAODv2/GluGluHToTauTau_M125_13TeV_powheg_pythia8/MINIAODSIM/FlatPU20to70HcalNZSRAW_withHLT_80X_mcRun2_asymptotic_v14-v1/50000/302E52FC-8567-E611-B2AA-0CC47A703326.root',
             #),
             #            '/store/data/Run2016B/SingleMuon/RAW/v2/000/274/199/00000/6E300626-5E26-E611-980B-02163E0119A2.root',

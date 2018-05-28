@@ -3,8 +3,8 @@ import FWCore.PythonUtilities.LumiList as LumiList
 import FWCore.ParameterSet.Config as cms
 process = cms.Process("TagAndProbe")
 
-isMC = True
-isMINIAOD = False
+isMC = False
+isMINIAOD = True
 
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.load("Configuration.StandardSequences.GeometryRecoDB_cff")
@@ -97,7 +97,9 @@ if not isMC: # will use 80X
     process.load('EGTagAndProbe.EGTagAndProbe.tagAndProbe_cff')
     process.source = cms.Source("PoolSource",
         fileNames = cms.untracked.vstring(
-          '/store/data/Run2017B/SingleElectron/MINIAOD/PromptReco-v1/000/297/057/00000/94987913-A256-E711-A484-02163E01A391.root'            
+	  '/store/data/Run2017F/SingleElectron/MINIAOD/PromptReco-v1/000/306/456/00000/021FAD04-9FC7-E711-A685-FA163E9C96F1.root'
+	#  '/store/data/Run2017F/SingleElectron/MINIAOD/PromptReco-v1/000/306/460/00000/6236CEDA-C0C8-E711-9081-FA163E84B51B.root'
+        #  '/store/data/Run2017B/SingleElectron/MINIAOD/PromptReco-v1/000/297/057/00000/94987913-A256-E711-A484-02163E01A391.root'            
         ),
     )
 
