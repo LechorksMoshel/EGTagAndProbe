@@ -823,7 +823,7 @@ void Ntuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup& eSetup)
  
                                                 this -> _TowerHoE        = l1tEmuEG.towerHoE();  
    
-                                                this -> _iem             = l1tEmuEG.seedTowerEm();
+                                                //this -> _iem             = l1tEmuEG.seedTowerEm();
 
                                                 //this -> _ihad            = l1tEmuEG.seedTowerHad();
 
