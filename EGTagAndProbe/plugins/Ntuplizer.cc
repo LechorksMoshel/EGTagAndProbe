@@ -373,7 +373,7 @@ void Ntuplizer::Initialize() {
         this -> _Unpacked_dR = -1;
         this -> _Emulated_dR = -1;
 
-        this -> _seedTowerEt = -1;
+        //this -> _seedTowerEt = -1;
       
         this ->_TowerHoE = -666;
 
@@ -454,7 +454,7 @@ void Ntuplizer::beginJob()
         this -> _tree -> Branch("UnpackedDR", &_Unpacked_dR, "UnpackedDR/F");
         this -> _tree -> Branch("EmulatedDR", &_Emulated_dR, "EmulatedDR/F");
 
-        this -> _tree -> Branch("seedTowerEt", &_seedTowerEt, "seedTowerEt/I");
+        //this -> _tree -> Branch("seedTowerEt", &_seedTowerEt, "seedTowerEt/I");
    
         this -> _tree -> Branch("TowerHoE", &_TowerHoE,"TowerHoE/I");
 
@@ -819,7 +819,7 @@ void Ntuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup& eSetup)
 						this -> _l1tEmuRawEt     = l1tEmuEG.rawEt();
 						this -> _l1tEmuIsoEt     = l1tEmuEG.isoEt();
                                                 
-                                                this -> _seedTowerEt     = l1tEmuEG.seedTowerEt(); 
+                                                //this -> _seedTowerEt     = l1tEmuEG.seedTowerEt(); 
  
                                                 this -> _TowerHoE        = l1tEmuEG.towerHoE();  
    
