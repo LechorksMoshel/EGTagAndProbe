@@ -373,7 +373,7 @@ void Ntuplizer::Initialize() {
         this -> _Unpacked_dR = -1;
         this -> _Emulated_dR = -1;
 
-        this -> _seedTowerEt = -1;
+        //this -> _seedTowerEt = -1;
       
         this ->_TowerHoE = -666;
 
