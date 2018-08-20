@@ -5,7 +5,7 @@ Turnon.N: 2
 
 
 Turnon.1.Name: Stage2_vs_Pt_35GeV_1
-Turnon.1.File: /data_CMS/cms/strebler/L1_eg/TandP_dev/CMSSW_9_1_0_pre3/src/EGTagAndProbe/EGTagAndProbe/test/Ntuples_dir/NTuple_1.root
+Turnon.1.File: /afs/cern.ch/user/s/syuan/work/cmssw/CMSSW_9_4_0_pre3/src/EGTagAndProbe/EGTagAndProbe/test/Ntuples_dir/NTuple_1.root
 Turnon.1.Tree: Ntuplizer/TagAndProbe
 Turnon.1.XVar: eleProbeSclEt
 Turnon.1.Cut: hasL1_iso_40
@@ -19,7 +19,7 @@ Turnon.1.CB.Sigma: 3.3 0.01 100
 
 
 Turnon.2.Name: Stage2_vs_Pt_35GeV_2
-Turnon.2.File: /data_CMS/cms/strebler/L1_eg/TandP_dev/CMSSW_9_1_0_pre3/src/EGTagAndProbe/EGTagAndProbe/test/Ntuples_dir/NTuple_test.root
+Turnon.2.File: /afs/cern.ch/user/s/syuan/work/cmssw/CMSSW_9_4_0_pre3/src/EGTagAndProbe/EGTagAndProbe/test/Ntuples_dir/NTuple_1.root
 Turnon.2.Tree: Ntuplizer/TagAndProbe
 Turnon.2.XVar: eleProbeSclEt
 Turnon.2.Cut: hasL1_40

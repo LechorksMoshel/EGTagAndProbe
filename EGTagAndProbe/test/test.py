@@ -23,9 +23,9 @@ options.register ('JSONfile',
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
                   VarParsing.VarParsing.varType.string,          # string, int, or float
                   "JSON file (empty for no JSON)")
-options.outputFile = 'NTuple.root'
+options.outputFile = 'NTuple_event200.root'
 options.inputFiles = []
-options.maxEvents  = -999
+options.maxEvents  = 200
 options.parseArguments()
 
 
@@ -64,9 +64,9 @@ my_id_modules =[
 'RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_Spring15_25ns_V1_cff',    # both 25 and 50 ns cutbased ids produced
 'RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_Spring15_50ns_V1_cff',
 'RecoEgamma.ElectronIdentification.Identification.heepElectronID_HEEPV60_cff',                 # recommended for both 50 and 25 ns
-'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring15_25ns_nonTrig_V1_cff', # will not be produced for 50 ns, triggering still to come
-'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring15_25ns_Trig_V1_cff',    # 25 ns trig
-'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring15_50ns_Trig_V1_cff',    # 50 ns trig
+#'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring15_25ns_nonTrig_V1_cff', # will not be produced for 50 ns, triggering still to come
+#'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring15_25ns_Trig_V1_cff',    # 25 ns trig
+#'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring15_50ns_Trig_V1_cff',    # 50 ns trig
 'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring16_GeneralPurpose_V1_cff',   #Spring16
 'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring16_HZZ_V1_cff',   #Spring16 HZZ
 
@@ -93,13 +93,11 @@ process.electrons = cms.Sequence(getattr(process,mvaMod)*getattr(process,egmMod)
 
 if not isMC: # will use 80X
     from Configuration.AlCa.autoCond import autoCond
-    process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v8'
+    process.GlobalTag.globaltag = '101X_dataRun2_Prompt_v9'
     process.load('EGTagAndProbe.EGTagAndProbe.tagAndProbe_cff')
     process.source = cms.Source("PoolSource",
         fileNames = cms.untracked.vstring(
-	  '/store/data/Run2017F/SingleElectron/MINIAOD/PromptReco-v1/000/306/456/00000/021FAD04-9FC7-E711-A685-FA163E9C96F1.root'
-	#  '/store/data/Run2017F/SingleElectron/MINIAOD/PromptReco-v1/000/306/460/00000/6236CEDA-C0C8-E711-9081-FA163E84B51B.root'
-        #  '/store/data/Run2017B/SingleElectron/MINIAOD/PromptReco-v1/000/297/057/00000/94987913-A256-E711-A484-02163E01A391.root'            
+	'/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v3/000/316/766/00000/FC55975F-6C65-E811-9AD7-FA163E8A9748.root'
         ),
     )
 

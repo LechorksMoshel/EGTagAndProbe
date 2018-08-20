@@ -18,7 +18,8 @@ class TurnOn:
         self.lineColor   = args.get("LineColor", ROOT.kBlack)
         self.lineStyle   = args.get("LineStyle", 1)
         self.histo.SetName(self.name+"_histo")
-        self.fit.SetName(self.name+"_fit")
+	if self.fit!=None:
+        	self.fit.SetName(self.name+"_fit")
 
 
 
@@ -44,9 +45,13 @@ class TurnOnPlot:
         #canvas.SetLogx()
         hDummy = ROOT.TH1F("hDummy_"+self.name, self.name, 1, self.xRange[0], self.xRange[1])
         hDummy.SetAxisRange(0, 1.05, "Y")
+	if 'diff' in self.name:
+		hDummy.SetAxisRange(-0.1,0.1,'Y')
         hDummy.SetXTitle(self.xTitle)
         #hDummy.SetYTitle("Test")
         hDummy.SetYTitle("Efficiency")
+	if 'diff' in self.name:
+        	hDummy.SetYTitle("Efficiency difference")
         hDummy.Draw()
 
 
@@ -58,7 +63,7 @@ class TurnOnPlot:
         ypos  = 0.89
 
         CMSbox       = ROOT.TLatex  (xpos, ypos         , "CMS")
-        extraTextBox = ROOT.TLatex  (xpos, ypos - 0.05 , "#splitline{preliminary}{2016}")
+        extraTextBox = ROOT.TLatex  (xpos, ypos - 0.05 , "#splitline{preliminary}{2018}")
         CMSbox.SetNDC()
         extraTextBox.SetNDC()
         CMSbox.SetTextSize(cmsTextSize)
@@ -80,7 +85,7 @@ class TurnOnPlot:
         # lumi_num = float(cfg.readOption ("general::lumi"))
         # lumi_num = lumi_num/1000. # from pb-1 to fb-1
         # lumi = "%.1f fb^{-1} (13 TeV)" % lumi_num
-        lumi = "36.XX fb^{-1} (13 TeV)"
+        lumi = "0.21 fb^{-1} (13 TeV)"
         lumibox = ROOT.TLatex  (0.953, 0.95, lumi)
         lumibox.SetNDC()
         lumibox.SetTextAlign(31)
@@ -108,12 +113,13 @@ class TurnOnPlot:
             histo.SetMarkerStyle(turnon.markerStyle)
             histo.SetMarkerColor(turnon.markerColor)
             histo.SetLineColor(turnon.markerColor)
-            fit = turnon.fit
-            fit.SetLineStyle(turnon.lineStyle)
-            fit.SetLineColor(turnon.lineColor)
-            fit.SetLineWidth(2)
             histo.Draw("p same")
-            fit.Draw("l same")
+            fit = turnon.fit
+	    if fit!=None:
+            	fit.SetLineStyle(turnon.lineStyle)
+            	fit.SetLineColor(turnon.lineColor)
+            	fit.SetLineWidth(2)
+            	fit.Draw("l same")
             # legends
             legend.AddEntry(histo, turnon.legend, "pe")
             legend.Draw()
@@ -123,9 +129,11 @@ class TurnOnPlot:
         extraTextBox.Draw()
         lumibox.Draw()
         #print ("DEBUG: " + self.plotDir+"/"+self.name+".eps")
-        canvas.Print(self.plotDir+"/"+self.name+".pdf", "pdf")
-        canvas.Print(self.plotDir+"/"+self.name+".png", "png")
-        return canvas
+        #canvas.Print(self.plotDir+"/"+self.name+".pdf", "pdf")
+        canvas.Print(self.plotDir+"/"+self.name+"2018.png", "png")
+	canvas.SetLogx(1)
+	hDummy.GetXaxis().SetRangeUser(1,1000)
+        canvas.Print(self.plotDir+"/"+self.name+"2018log.png", "png")
 
 
     def setPlotStyle(self):

@@ -115,7 +115,8 @@ bool TurnonManager::readConfig(const std::string& config)
         m_turnonFits.back()->setTreeName(tree);
         m_turnonFits.back()->setNCPU(m_nCPU);
         m_turnonFits.back()->setNoFit(m_noFit);
-        m_turnonFits.back()->setXVar(xVar, fitRangeValues[0], fitRangeValues[1]);
+        m_turnonFits.back()->setXVar(xVar, 0, 1000);
+        m_turnonFits.back()->setFitRange(fitRangeValues[0], fitRangeValues[1]);
         m_turnonFits.back()->setCut(cut);
         m_turnonFits.back()->setSelectionVars(selectionVarsList);
         m_turnonFits.back()->setSelection(selection);

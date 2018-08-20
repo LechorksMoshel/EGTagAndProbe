@@ -32,6 +32,7 @@
 #include "RooFitResult.h"
 #include "RooRealVar.h"
 #include "FuncCB.h"
+#include "RooHistPdf.h"
 
 
 class TurnonFit
@@ -47,7 +48,8 @@ class TurnonFit
 
         void setFileName(const std::string& fileName) {m_fileName = fileName;}
         void setTreeName(const std::string& treeName) {m_treeName = treeName;}
-        void setXVar(const std::string& xVar, double min, double max) {m_xVar.SetName(xVar.c_str()); m_xVar.setRange(min, max);}
+        void setXVar(const std::string& xVar, double min=0, double max=1000) {m_xVar.SetName(xVar.c_str()); m_xVar.setRange(min, max);}
+        void setFitRange(double min, double max) {m_fitrange[0]=min;m_fitrange[1]=max;}
         void setCut(const std::string& cut) {m_cut = cut;}
         void setSelectionVars(const std::vector<std::string>& selectionVars) {m_selectionVars = selectionVars;}
         void setSelection(const std::string& selection) {m_selection = selection;}
@@ -74,6 +76,7 @@ class TurnonFit
         std::string m_weightVar;
         std::string m_selection;
         std::vector<double> m_binning;
+        double m_fitrange[2];
         int m_nCPU;
         bool m_noFit;
 

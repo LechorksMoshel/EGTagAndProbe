@@ -14,6 +14,7 @@
  *
  * =====================================================================================
  */
+#define KFit
 
 
 #include "TurnonFit.h"
@@ -30,6 +31,7 @@
 #include "RooEfficiency.h"
 #include "RooDataSet.h"
 #include "RooBinning.h"
+#include "RooKeysPdf.h"
 
 using namespace std;
 using namespace RooFit;
@@ -37,7 +39,7 @@ using namespace RooFit;
 
 /*****************************************************************/
 TurnonFit::TurnonFit(const std::string& name):m_name(name),
-    m_xVar    ("xVar",     "p_{T}",    20.,    0.,     150.),
+    m_xVar    ("xVar",     "p_{T}",    20.,    0.,     1000.),
     m_max     ("max",      "max",      1.0,    0.9,    1.),
     m_alpha   ("alpha",    "#alpha",   3.,     0.01,   50.),
     m_n       ("n",        "n",        10.,    1.001,  50.),
@@ -120,10 +122,18 @@ void TurnonFit::fit()
     vector<RooRealVar> weightVars;
     //m_selection = "tauPt>250";
 
-    RooRealVar rv1("l1tPt","l1tPt",0.);
-    RooRealVar rv2("l1tIso","l1tIso",0.);
-    argSet.add(rv1);
+    //RooRealVar rv1("eleProbeSclEt","eleProbeSclEt",0.);
+    RooRealVar rv2("isProbeLoose","isProbeLoose",0.);
+    //RooRealVar rv3("eleProbeEta","eleProbeEta",0.);
+    RooRealVar rv4("eleTagEta","eleTagEta",0.);
+    RooRealVar rv5("eleProbePhi","eleProbePhi",0.);
+    RooRealVar rv6("eleTagPhi","eleTagPhi",0.);
+    //argSet.add(rv1);
     argSet.add(rv2);
+    //argSet.add(rv3);
+    argSet.add(rv4);
+    argSet.add(rv5);
+    argSet.add(rv6);
     argSet.Print();
 
 
@@ -173,9 +183,7 @@ void TurnonFit::fit()
     //if(!m_noFit) m_fitResult = eff.fitTo(*dataSet,ConditionalObservables(m_xVar),Minos(kTRUE),Warnings(kFALSE),NumCPU(m_nCPU),Save(kTRUE),Verbose(kFALSE));
     if(!m_noFit)
     {
-        if (m_weightVar=="") m_fitResult = eff.fitTo(*dataSet,ConditionalObservables(m_xVar),Minos(kFALSE),Warnings(kFALSE),NumCPU(m_nCPU),Save(kTRUE),Verbose(kFALSE),SumW2Error(kTRUE));
-        // if (m_weightVar=="") m_fitResult = eff.fitTo(*dataSet,ConditionalObservables(m_xVar),Minos(kFALSE),Warnings(kFALSE),NumCPU(m_nCPU),Save(kTRUE),Verbose(kFALSE));
-        else                 m_fitResult = eff.fitTo(*dataSet,ConditionalObservables(m_xVar),Minos(kFALSE),Warnings(kFALSE),NumCPU(m_nCPU),Save(kTRUE),Verbose(kFALSE),SumW2Error(kTRUE));
+        m_fitResult = eff.fitTo(*dataSet,ConditionalObservables(m_xVar),Minos(kFALSE),Warnings(kFALSE),NumCPU(m_nCPU),Save(kTRUE),SumW2Error(kTRUE),Range(m_fitrange[0],m_fitrange[1]));
         stringstream resultName;
         resultName << "fitResult_" << m_name;
         m_fitResult->SetName(resultName.str().c_str());
@@ -183,6 +191,7 @@ void TurnonFit::fit()
 
     // m_function->plotOn(m_plot,VisualizeError(*m_fitResult,1),FillColor(kOrange),LineColor(kRed),LineWidth(2));
     m_function->plotOn(m_plot,LineColor(kRed),LineWidth(2));
+    printParameters();
 
     m_plot->GetYaxis()->SetRangeUser(0,1.05);
     m_plot->GetXaxis()->SetRangeUser(m_xVar.getMin(),m_xVar.getMax());
@@ -213,7 +222,6 @@ void TurnonFit::fit()
     file->Close();
     dataSet->Delete();
 
-    printParameters();
 
 }
 
@@ -260,7 +268,7 @@ void TurnonFit::printParameters()
     cout<<"  Selection: "<<m_selection<<"\n";
     cout<<"  WeightVar: "<<m_weightVar<<"\n";
     cout<<"  CB       :\n";
-    cout<<"    Max  : "<<m_max.getVal()  <<" ["<<m_max.getMin()  <<", "<<m_max.getMax()<<"]\n";
+    cout<<"    Max  : "<<m_max.getValV()  <<" ["<<m_max.getMin()  <<", "<<m_max.getMax()<<"]\n";
     cout<<"    Alpha: "<<m_alpha.getVal()<<" ["<<m_alpha.getMin()<<", "<<m_alpha.getMax()<<"]\n";
     cout<<"    n    : "<<m_n.getVal()    <<" ["<<m_n.getMin()    <<", "<<m_n.getMax()<<"]\n";
     cout<<"    mean : "<<m_mean.getVal() <<" ["<<m_mean.getMin() <<", "<<m_mean.getMax()<<"]\n";
