@@ -3,5 +3,6 @@
 *.so
 *.pdf
 *.zip
+*.log
 fit.exe
 *~

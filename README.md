@@ -2,8 +2,10 @@
 Set of tools to evaluate L1EG trigger performance on T&amp;P
 
 Based on TauTagAndProbe package developed by L. Cadamuro & O. Davignon
+Forked from https://github.com/pkontaxa/EGTagAndProbe
 
 ### Install instructions
+To run on 2017 data:
 ```
 cmsrel CMSSW_9_4_0_pre3
 cd CMSSW_9_4_0_pre3/src
@@ -11,6 +13,8 @@ cmsenv
 git clone https://github.com/pkontaxa/EGTagAndProbe
 scram b -j4
 ```
+To run on the latest data:
+Follow instructions from 
 
 ### Producing TagAndProbe ntuples with unpacked L1EG (no re-emulation)
 Set flag isMC and isMINIAOD according to sample in test/test.py
