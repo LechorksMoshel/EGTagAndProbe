@@ -5,16 +5,15 @@ Based on TauTagAndProbe package developed by L. Cadamuro & O. Davignon
 Forked from https://github.com/pkontaxa/EGTagAndProbe
 
 ### Install instructions
-To run on 2017 data:
+To run on 2018 data:(this version not tested on 2017 data yet)
+Follow [L1 Trigger Emulator Stage 2 Upgrade Instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions)
+Then clone the repository:
 ```
-cmsrel CMSSW_9_4_0_pre3
-cd CMSSW_9_4_0_pre3/src
-cmsenv
-git clone https://github.com/pkontaxa/EGTagAndProbe
+git clone https://github.com/siqiyyyy/EGTagAndProbe
 scram b -j4
 ```
-To run on the latest data:
-Follow instructions from 
+Now you have set up the work directory. 
+
 
 ### Producing TagAndProbe ntuples with unpacked L1EG (no re-emulation)
 Set flag isMC and isMINIAOD according to sample in test/test.py
@@ -23,7 +22,8 @@ Launch test.py
 
 
 ### Producing TagAndProbe ntuples with emulated L1EG
-Under development
+test/reEmulL1.py is an example of cms pset file to run re-emulation on 2018 runC data.
+Here is a checklist of code you need to modify in order to run your desired process.
 
 
 ### Submit job on the Grid
