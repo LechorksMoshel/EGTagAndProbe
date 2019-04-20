@@ -24,7 +24,11 @@ Launch test.py
 reEmulL1.py is an example of cms pset file to run re-emulation on 2018 runC data.
 Here is a checklist of code you need to modify in order to run your desired process.
 + Update electron ID to be exactly the same ones used in the data
-+ Make sure you use L1TReEmulFromRawsimEcalTP(process) instead of L1TReEmulFromRaw(process) 
++ Make sure you use L1TReEmulFromRawsimEcalTP(process) instead of L1TReEmulFromRaw(process). Corresponding lines in reEmulL1.py are:
+```
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimEcalTP
+process = L1TReEmulFromRAWsimEcalTP(process)
+```
 + Use the correct Calo parameters according to your run number. See [L1 Known Issues](https://twiki.cern.ch/twiki/bin/viewauth/CMS/L1KnownIssues#Calo). You can edit this in the line:```process.load("L1Trigger.L1TCalorimeter.caloParams_2018_v1_3_cfi")``` in the reEmulL1.py.
 + Be sure to use the correct sqlite file (with extension .db) in your reEmulL1.py
 
